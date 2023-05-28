@@ -44,7 +44,7 @@ const callForward = async (voiceResponse) => {
             voice: 'Polly.Raveena'
         }, 
         textMiddleware('Please calm down, let me connect you to one of your friend'));
-        voiceResponse.dial('+919030438365', {
+        voiceResponse.dial(process.env.FORWARDPHONE, {
             action: '/goodbye'
         });
     } catch(err) {
@@ -167,8 +167,8 @@ app.get("/call", (req, res) => {
     client.calls
       .create({
          url: 'https://8dc1-122-171-20-190.in.ngrok.io/voice',
-         to: '+917355791960',
-         from: '+13156678648'
+         to: process.env.TOPHONE,
+         from: process.env.FROMPHONE
        })
       .then(call => console.log(call.status));
 });
@@ -182,7 +182,7 @@ app.post("/forward", async (req, res) => {
             voice: 'Polly.Raveena'
         }, 
         textMiddleware('Please calm down, let me connect you to one of your friend'));
-        twilio.dial('+919030438365', {
+        twilio.dial('', {
             action: '/goodbye'
         });
         res.set('Content-Type', 'text/xml');
